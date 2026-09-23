@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#FFD60A">
+  <title>دنیای رنگارنگ AK</title>
+  <meta name="description" content="یه صفحه‌ی زرد و رنگارنگ با آفتاب، پیشی، پیتزا ناپولیتن و یه دکمه‌ی محاسبه AK.">
+  <meta property="og:title" content="دنیای رنگارنگ AK">
+  <meta property="og:description" content="آفتاب، پیشی، پیتزا و یه دکمه‌ی محاسبه AK.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Fixed backdrop: sunny gradient, colour splashes, and the sun with its rotating rays -->
+  <div class="sky" aria-hidden="true">
+    <div class="sky__sun">
+      <svg class="sun" viewBox="0 0 200 200" focusable="false">
+        <defs>
+          <path id="sun-ray" d="M100 6 L112 42 H88Z"/>
+          <radialGradient id="sun-fill" cx="40%" cy="35%" r="70%">
+            <stop offset="0" stop-color="#FFF7A8"/>
+            <stop offset="1" stop-color="#FFC400"/>
+          </radialGradient>
+        </defs>
+        <g class="sun__rays" stroke="#2B1B4A" stroke-width="4" stroke-linejoin="round">
+          <use href="#sun-ray" fill="#FF8A3D"/>
+          <use href="#sun-ray" fill="#FFF27A" transform="rotate(30 100 100)"/>
+          <use href="#sun-ray" fill="#FF5FA2" transform="rotate(60 100 100)"/>
+          <use href="#sun-ray" fill="#FF8A3D" transform="rotate(90 100 100)"/>
+          <use href="#sun-ray" fill="#FFF27A" transform="rotate(120 100 100)"/>
+          <use href="#sun-ray" fill="#FF5FA2" transform="rotate(150 100 100)"/>
+          <use href="#sun-ray" fill="#FF8A3D" transform="rotate(180 100 100)"/>
+          <use href="#sun-ray" fill="#FFF27A" transform="rotate(210 100 100)"/>
+          <use href="#sun-ray" fill="#FF5FA2" transform="rotate(240 100 100)"/>
+          <use href="#sun-ray" fill="#FF8A3D" transform="rotate(270 100 100)"/>
+          <use href="#sun-ray" fill="#FFF27A" transform="rotate(300 100 100)"/>
+          <use href="#sun-ray" fill="#FF5FA2" transform="rotate(330 100 100)"/>
+        </g>
+        <circle cx="100" cy="100" r="54" fill="url(#sun-fill)" stroke="#2B1B4A" stroke-width="4.5"/>
+        <ellipse cx="82" cy="94" rx="5" ry="7.5" fill="#2B1B4A"/>
+        <ellipse cx="118" cy="94" rx="5" ry="7.5" fill="#2B1B4A"/>
+        <circle cx="84" cy="91" r="2" fill="#fff"/>
+        <circle cx="120" cy="91" r="2" fill="#fff"/>
+        <ellipse cx="68" cy="112" rx="9" ry="5.5" fill="#FF5FA2" opacity=".55"/>
+        <ellipse cx="132" cy="112" rx="9" ry="5.5" fill="#FF5FA2" opacity=".55"/>
+        <path d="M82 110 Q100 132 118 110" fill="none" stroke="#2B1B4A" stroke-width="4.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="hero__inner">
+      <p class="medal" role="img" aria-label="رتبه ۱ ارشد">
+        <span class="medal__disc" aria-hidden="true">۱</span>
+        <span class="medal__text" aria-hidden="true">رتبه ۱ ارشد</span>
+      </p>
+      <h1 class="title">میزان علاقه بچه کوصه به خورشید!</h1>
+      <p class="lead">این وب اپو مخصوص زیبا ترین دوخس دنیا که رتبه یک کنکور ارشد هس ساختم</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- The one real feature: the AK button -->
+    <section class="machine" aria-labelledby="ak-heading">
+      <div class="machine__card">
+        <div class="peek peek--a" data-cat data-fur="#FFA53D" data-belly="#FFE9C7" data-ear="#FF8FB1" data-stripe="#B95E0E" data-acc="bow" aria-hidden="true"></div>
+        <div class="peek peek--b" data-cat data-fur="#FFFFFF" data-belly="#FFF1F6" data-ear="#FFB3CF" aria-hidden="true"></div>
+
+        <h2 class="machine__title" id="ak-heading">عدد علاقه امروز</h2>
+        <p class="machine__hint">اکسپوننشیال تعداد روزها</p>
+
+        <button class="ak-button" id="ak-button" type="button">محاسبه AK</button>
+
+        <div class="display" id="ak-display" aria-live="polite">
+          <p class="display__empty" id="ak-empty">هنوز نفهمیدی اقا کیا چقدر دوستت داره</p>
+          <p class="display__error" id="ak-error" hidden>انقدر عددش زیاده که نمیشه نشونش داد!</p>
+
+          <div class="display__result" id="ak-result" hidden>
+            <p class="display__label" dir="ltr">AK = e<sup id="ak-exp">51</sup></p>
+            <p class="digits" id="ak-digits" dir="ltr"></p>
+            <div class="display__meta">
+              <span class="chip chip--sun" id="ak-int-count"></span>
+              <span class="chip chip--sky" id="ak-frac-count"></span>
+              <span class="chip chip--pink">فردا: <span dir="ltr">e<sup id="ak-next">52</sup></span></span>
+              <button class="chip chip--copy" id="ak-copy" type="button">کپی عدد</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Decorative scenes -->
+    <section class="places" aria-labelledby="places-heading">
+      <h2 class="sr-only" id="places-heading">پیتزا، کانادا و نیویورک</h2>
+
+      <article class="sticker sticker--pizza">
+        <div class="sticker__art">
+          <img src="assets/pizza.svg" width="240" height="240" alt="پیتزا ناپولیتن مارگریتا با حاشیه‌ی خال‌خالی">
+        </div>
+        <div class="sticker__body">
+          <h3>پیتزا ناپولیتن</h3>
+          <p class="sticker__sub" dir="ltr">Pizza Napoletana</p>
+          <p>پیتزایی ک یه روزی باهات همراهی میکنم تو خوردنش!</p>
+        </div>
+      </article>
+
+      <article class="sticker sticker--canada">
+        <div class="sticker__art">
+          <img src="assets/canada.svg" width="320" height="200" alt="کوه‌ها، درخت‌های کاج و یک برگ افرای قرمز، نماد کانادا">
+        </div>
+        <div class="sticker__body">
+          <h3>کانادا</h3>
+          <p class="sticker__sub" dir="ltr">Canada</p>
+          <p>اینجا جاییه ک قراره باهم بریم!</p>
+        </div>
+      </article>
+
+      <article class="sticker sticker--nyc">
+        <div class="sticker__art">
+          <img src="assets/new-york.svg" width="320" height="200" alt="خط آسمان نیویورک با مجسمه‌ی آزادی و یک تاکسی زرد">
+        </div>
+        <div class="sticker__body">
+          <h3>نیویورک</h3>
+          <p class="sticker__sub" dir="ltr">New York</p>
+          <p>اینجام قراره سوار دوج ستاد فرماندهی کوصه ها بشی</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- Cats -->
+    <section class="cats-section" aria-labelledby="cats-heading">
+      <h2 class="section-title" id="cats-heading">پیشی‌ها</h2>
+      <p class="section-note">نازشون کن؛ روشون کلیک کن.</p>
+
+      <div class="cats">
+        <button class="cat-card" type="button" aria-label="نازِ مارمالاد" style="--tint:#FF8FC0"
+                data-cat data-fur="#FFA53D" data-belly="#FFE9C7" data-ear="#FF8FB1" data-stripe="#B95E0E" data-acc="slice">
+          <span class="cat-card__bubble" aria-hidden="true"></span>
+          <span class="cat-card__stage" data-cat-slot></span>
+          <span class="cat-card__name">مارمالاد</span>
+        </button>
+
+        <button class="cat-card" type="button" aria-label="نازِ ابرک" style="--tint:#7FE0FF"
+                data-cat data-fur="#A9B4C9" data-belly="#EEF2FA" data-ear="#FFA6C6" data-stripe="#66739A" data-acc="shades">
+          <span class="cat-card__bubble" aria-hidden="true"></span>
+          <span class="cat-card__stage" data-cat-slot></span>
+          <span class="cat-card__name">ابرک</span>
+        </button>
+
+        <button class="cat-card" type="button" aria-label="نازِ پنبه" style="--tint:#9DF0C4"
+                data-cat data-fur="#FFFFFF" data-belly="#FFF1F6" data-ear="#FFB3CF" data-acc="bow">
+          <span class="cat-card__bubble" aria-hidden="true"></span>
+          <span class="cat-card__stage" data-cat-slot></span>
+          <span class="cat-card__name">پنبه</span>
+        </button>
+
+        <button class="cat-card" type="button" aria-label="نازِ شب‌بو" style="--tint:#C3A8FF"
+                data-cat data-fur="#4A3A6E" data-belly="#6B5A93" data-ear="#FF8FB1" data-iris="#FFE14D" data-tip="#6B5A93" data-acc="scarf">
+          <span class="cat-card__bubble" aria-hidden="true"></span>
+          <span class="cat-card__stage" data-cat-slot></span>
+          <span class="cat-card__name">شب‌بو</span>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="rainbow" aria-hidden="true"></div>
+    <div class="footer__text">
+      <p>ساخته‌شده با آفتاب، موتزارلا و کلی رنگ.</p>
+      <p class="footer__rule"><span dir="ltr">AK = e<sup>n</sup></span> · <span data-rule>n هر روز یکی بیشتر می‌شه.</span></p>
+    </div>
+  </footer>
+
+  <noscript><p class="noscript">برای محاسبه‌ی AK باید جاوااسکریپت روشن باشه.</p></noscript>
+
+  <!-- One cat, cloned by js/app.js and recoloured through CSS custom properties -->
+  <template id="cat-template">
+    <svg class="cat" viewBox="0 0 200 212" aria-hidden="true" focusable="false">
+      <g class="cat__tail">
+        <path d="M140 184 C186 188 196 146 168 124" fill="none" stroke="#2B1B4A" stroke-width="22" stroke-linecap="round"/>
+        <path d="M140 184 C186 188 196 146 168 124" class="c-fur-stroke" fill="none" stroke-width="14" stroke-linecap="round"/>
+        <path d="M181.9 143.2 Q178 130 168 124" class="c-tip-stroke" fill="none" stroke-width="14" stroke-linecap="round"/>
+      </g>
+
+      <path d="M50 180 C42 132 66 112 100 112 C134 112 158 132 150 180 C150 198 130 202 100 202 C70 202 50 198 50 180Z" class="c-fur" stroke="#2B1B4A" stroke-width="4" stroke-linejoin="round"/>
+      <ellipse cx="100" cy="170" rx="26" ry="28" class="c-belly"/>
+      <path d="M58 150 h14 M56 162 h12 M142 150 h-14 M144 162 h-12" class="c-stripe-stroke" fill="none" stroke-width="4" stroke-linecap="round"/>
+      <ellipse cx="80" cy="198" rx="17" ry="10" class="c-belly" stroke="#2B1B4A" stroke-width="4"/>
+      <ellipse cx="120" cy="198" rx="17" ry="10" class="c-belly" stroke="#2B1B4A" stroke-width="4"/>
+      <path d="M75 194 v7 M85 194 v7 M115 194 v7 M125 194 v7" fill="none" stroke="#2B1B4A" stroke-width="2.5" stroke-linecap="round"/>
+
+      <g class="acc acc-scarf" stroke="#2B1B4A" stroke-width="3.5" stroke-linejoin="round">
+        <path d="M58 128 Q100 148 142 128 L140 144 Q100 164 60 144Z" fill="#E5352B"/>
+        <path d="M122 148 l6 30 l16 -4 l-4 -28z" fill="#E5352B"/>
+        <path d="M126 158 l14 -3 M128 168 l14 -3" fill="none" stroke="#FFD60A" stroke-width="3" stroke-linecap="round"/>
+      </g>
+
+      <g class="acc acc-slice" stroke="#2B1B4A" stroke-width="3.5" stroke-linejoin="round">
+        <path d="M78 150 L122 150 L100 196Z" fill="#FFC24B"/>
+        <rect x="74" y="143" width="52" height="12" rx="6" fill="#E39B2E"/>
+        <circle cx="92" cy="166" r="5" fill="#E5352B" stroke-width="2.5"/>
+        <circle cx="106" cy="174" r="4.5" fill="#E5352B" stroke-width="2.5"/>
+        <circle cx="103" cy="158" r="3.5" fill="#E5352B" stroke-width="2.5"/>
+        <ellipse cx="79" cy="154" rx="12" ry="9" class="c-belly"/>
+        <ellipse cx="121" cy="154" rx="12" ry="9" class="c-belly"/>
+      </g>
+
+      <g class="cat__ear-r">
+        <path d="M154 64 L150 14 L108 44 Z" class="c-fur" stroke="#2B1B4A" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M144 50 L142 29 L124 42 Z" class="c-ear"/>
+      </g>
+      <g class="cat__ear-l">
+        <path d="M46 64 L50 14 L92 44 Z" class="c-fur" stroke="#2B1B4A" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M56 50 L58 29 L76 42 Z" class="c-ear"/>
+      </g>
+
+      <ellipse cx="100" cy="88" rx="58" ry="47" class="c-fur" stroke="#2B1B4A" stroke-width="4"/>
+      <path d="M100 43 v14 M88 45 l3 11 M112 45 l-3 11 M46 84 h12 M46 95 h10 M154 84 h-12 M154 95 h-10" class="c-stripe-stroke" fill="none" stroke-width="4" stroke-linecap="round"/>
+
+      <g class="cat__eyes">
+        <ellipse cx="76" cy="90" rx="8.5" ry="11" class="c-iris"/>
+        <ellipse cx="124" cy="90" rx="8.5" ry="11" class="c-iris"/>
+        <ellipse cx="76" cy="90" rx="3.2" ry="9" class="c-pupil"/>
+        <ellipse cx="124" cy="90" rx="3.2" ry="9" class="c-pupil"/>
+        <circle cx="79" cy="85" r="3.2" fill="#fff"/>
+        <circle cx="127" cy="85" r="3.2" fill="#fff"/>
+        <circle cx="73" cy="95" r="1.6" fill="#fff"/>
+        <circle cx="121" cy="95" r="1.6" fill="#fff"/>
+      </g>
+
+      <ellipse cx="60" cy="108" rx="9" ry="5.5" fill="#FF7FA6" opacity=".55"/>
+      <ellipse cx="140" cy="108" rx="9" ry="5.5" fill="#FF7FA6" opacity=".55"/>
+      <path d="M94 101 h12 l-6 7Z" fill="#FF7FA6" stroke="#2B1B4A" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M100 108 v4 M100 112 q-7 8 -14 2 M100 112 q7 8 14 2" fill="none" stroke="#2B1B4A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M44 100 L14 93 M44 108 L14 111 M156 100 L186 93 M156 108 L186 111" fill="none" stroke="#2B1B4A" stroke-width="2.5" stroke-linecap="round"/>
+
+      <g class="acc acc-shades">
+        <rect x="56" y="76" width="38" height="25" rx="11" fill="#2B1B4A"/>
+        <rect x="106" y="76" width="38" height="25" rx="11" fill="#2B1B4A"/>
+        <path d="M94 84 h12" stroke="#2B1B4A" stroke-width="4"/>
+        <path d="M62 83 l12 -3 M112 83 l12 -3" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+      </g>
+
+      <g class="acc acc-bow" transform="translate(140 40) rotate(14)" stroke="#2B1B4A" stroke-width="3.5" stroke-linejoin="round">
+        <path d="M0 0 L-17 -11 L-17 11Z M0 0 L17 -11 L17 11Z" fill="#FF4F9A"/>
+        <circle r="5.5" fill="#FF8EC3"/>
+      </g>
+    </svg>
+  </template>
+
+  <script src="js/ak-math.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

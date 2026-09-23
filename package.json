@@ -1,0 +1,10 @@
+{
+  "name": "ak-sunshine",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A very colorful static page with one job: the AK button prints e^n, where n grows by one every day.",
+  "scripts": {
+    "test": "node --test test/ak-math.test.js",
+    "start": "python3 -m http.server 8080"
+  }
+}
